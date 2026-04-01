@@ -1,4 +1,4 @@
-.PHONY: all install up down logs test clean
+.PHONY: all install up up-local-redis down logs test clean
 
 all: run
 
@@ -21,8 +21,7 @@ install:
 run: install up
 
 up:
-	@echo "Starting infrastructure..."
-	docker compose up -d
+	@echo "Using remote infrastructure (Supabase + Upstash)..."
 	@echo "Starting services in parallel..."
 	@trap "make down" INT; \
 	( \
@@ -36,13 +35,18 @@ up:
 		(cd apps/agent && uv run celery -A workers.tasks.celery_app worker --loglevel=INFO) \
 	)
 
+up-local-redis:
+	@echo "Starting local Redis + services..."
+	docker compose up -d redis
+	@$(MAKE) up
+
 down:
 	@echo "Stopping all services..."
 	@pkill -f "bun run dev:realtime" || true
 	@pkill -f "bun run dev:web" || true
 	@pkill -f "uvicorn api.main:app" || true
 	@pkill -f "celery -A workers.tasks.celery_app worker" || true
-	@echo "Stopping infrastructure..."
+	@echo "Stopping optional local infrastructure..."
 	docker compose down
 	@echo "All services stopped."
 

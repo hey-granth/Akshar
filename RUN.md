@@ -14,7 +14,9 @@ Install these first:
 - `bun`
 - `uv`
 - `make`
-- Docker + Docker Compose
+- Supabase account/project (for Postgres)
+- Upstash Redis database
+- Docker + Docker Compose (optional, only for local Redis fallback)
 
 ### 2) Clone and configure
 
@@ -26,12 +28,14 @@ cd Akshar
 cp .env.example .env
 ```
 
+Update `DATABASE_URL` in `.env` with your Supabase Postgres connection string.
+Update `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in `.env` with your Upstash Redis credentials.
+
 ### 3) Run everything
 
 This single command will:
 1. Install all JS and Python dependencies.
-2. Start the Postgres and Redis containers.
-3. Start all four services in the background.
+2. Start all four services using Supabase + Upstash.
 
 ```bash
 make
@@ -57,6 +61,7 @@ make down
 - `make test`: Run type checks and Python tests.
 - `make clean`: Remove all build artifacts and `node_modules`.
 - `make logs`: Tail logs from the Docker containers.
+- `make up-local-redis`: Optional fallback to run local Redis + services.
 
 
 ## The Manual Way
@@ -69,7 +74,9 @@ Install these first:
 
 - `bun`
 - `uv`
-- Docker + Docker Compose
+- Supabase account/project (for Postgres)
+- Upstash Redis database
+- Docker + Docker Compose (optional, only for local Redis fallback)
 
 ### 2) Clone and configure
 
@@ -81,10 +88,13 @@ cd Akshar
 cp .env.example .env
 ```
 
-### 3) Start infrastructure (Postgres + Redis)
+Update `DATABASE_URL` in `.env` with your Supabase Postgres connection string.
+Update `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in `.env` with your Upstash Redis credentials.
+
+### 3) Start infrastructure (optional local Redis fallback)
 
 ```bash
-docker compose up -d
+docker compose up -d redis
 ```
 
 To verify containers are running:
@@ -185,8 +195,12 @@ docker compose down -v
 ## 9) Common issues
 
 - Port already in use:
-  - Check ports `3000`, `4001`, `4002`, `8001`, `5432`, `6379`.
+  - Check ports `3000`, `4001`, `4002`, `8001`, `6379`.
 - Agent import errors:
   - Ensure you run agent commands via `uv run ...`.
 - Missing env values:
   - Re-copy `.env` from `.env.example` and restart services.
+- Database connection errors:
+  - Verify `DATABASE_URL` points to Supabase and credentials are valid.
+- Redis connection errors:
+  - Verify `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` are set correctly.

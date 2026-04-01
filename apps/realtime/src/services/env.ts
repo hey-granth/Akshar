@@ -5,7 +5,10 @@ const EnvSchema = z.object({
   HOCUSPOCUS_PORT: z.coerce.number().int().positive().default(4002),
   AGENT_API_URL: z.string().url().default("http://localhost:8001"),
   DATABASE_URL: z.string().url().optional(),
-  REDIS_URL: z.string().url().default("redis://localhost:6379")
+  REDIS_URL: z.string().url().optional(),
+  UPSTASH_REDIS_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_URL: z.string().url().optional(),
+  UPSTASH_REDIS_REST_TOKEN: z.string().min(1).optional()
 });
 
 export type AppEnv = z.infer<typeof EnvSchema>;

@@ -6,7 +6,11 @@ from schemas.agent import RewriteSectionRequest, SummarizeDocumentRequest
 from services.agent_service import AgentService
 
 logger = get_logger(__name__)
-celery_app = Celery("akshar_agent", broker=settings.redis_url, backend=settings.redis_url)
+celery_app = Celery(
+    "akshar_agent",
+    broker=settings.resolved_redis_url,
+    backend=settings.resolved_redis_url,
+)
 agent_service = AgentService()
 
 

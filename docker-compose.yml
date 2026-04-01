@@ -1,23 +1,6 @@
-version: "3.9"
-
 services:
-  postgres:
-    image: pgvector/pgvector:pg16
-    container_name: akshar-postgres
-    environment:
-      POSTGRES_DB: akshar
-      POSTGRES_USER: akshar
-      POSTGRES_PASSWORD: akshar
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-
   redis:
     image: redis:7.4
     container_name: akshar-redis
     ports:
       - "6379:6379"
-
-volumes:
-  postgres-data:

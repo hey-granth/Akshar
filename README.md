@@ -9,16 +9,20 @@ Collaborative, agentic document editor MVP with strict separation:
 
 - `bun`
 - `uv`
-- Docker (for Postgres + Redis)
+- Supabase project (for Postgres)
+- Upstash Redis database
+- Docker (optional, only for local Redis fallback)
 
 ## Setup
 
 ```bash
 cp .env.example .env
-docker compose up -d
 bun install
 cd apps/agent && uv sync && cd ../..
 ```
+
+Set `DATABASE_URL` in `.env` to your Supabase Postgres connection string.
+Set `UPSTASH_REDIS_REST_URL` and `UPSTASH_REDIS_REST_TOKEN` in `.env` to your Upstash Redis credentials.
 
 ## Run
 

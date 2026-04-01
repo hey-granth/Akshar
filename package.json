@@ -1,0 +1,19 @@
+{
+  "name": "akshar",
+  "private": true,
+  "packageManager": "bun@1.2.8",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "bun --cwd apps/web run dev",
+    "dev:realtime": "bun --cwd apps/realtime run dev",
+    "build:web": "bun --cwd apps/web run build",
+    "build:realtime": "bun --cwd apps/realtime run build",
+    "typecheck:contracts": "cd packages/contracts && bun run typecheck",
+    "typecheck:realtime": "cd apps/realtime && bun run typecheck",
+    "typecheck:web": "cd apps/web && bun run typecheck",
+    "typecheck": "bun run typecheck:contracts && bun run typecheck:realtime && bun run typecheck:web"
+  }
+}

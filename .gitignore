@@ -1,0 +1,16 @@
+node_modules/
+.bun/
+.next/
+out/
+dist/
+coverage/
+.env
+.env.local
+__pycache__/
+.pytest_cache/
+.venv/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+.DS_Store

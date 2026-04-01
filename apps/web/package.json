@@ -1,0 +1,37 @@
+{
+  "name": "@akshar/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "bun x next dev",
+    "build": "bun x next build",
+    "start": "bun x next start",
+    "typecheck": "bun x tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@akshar/contracts": "workspace:*",
+    "@hocuspocus/provider": "^3.2.6",
+    "@tiptap/extension-code-block": "^2.11.5",
+    "@tiptap/extension-collaboration": "^2.11.5",
+    "@tiptap/extension-collaboration-cursor": "^2.11.5",
+    "@tiptap/extension-heading": "^2.11.5",
+    "@tiptap/extension-list-item": "^2.11.5",
+    "@tiptap/extension-ordered-list": "^2.11.5",
+    "@tiptap/extension-bullet-list": "^2.11.5",
+    "@tiptap/extension-paragraph": "^2.11.5",
+    "@tiptap/core": "^2.11.5",
+    "@tiptap/react": "^2.11.5",
+    "next": "^15.2.2",
+    "prosemirror-model": "^1.24.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "prosemirror-state": "^1.4.3",
+    "yjs": "^13.6.24"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "^5.8.2"
+  }
+}
